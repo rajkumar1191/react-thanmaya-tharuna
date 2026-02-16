@@ -1,3 +1,5 @@
+import { useState } from "react";
+import AddUser from "./components/AddUser";
 import Dashboard from "./components/Dashboard";
 import Services from "./components/Services";
 
@@ -49,18 +51,27 @@ const App = () => {
     },
   ];
 
+  const [users, setUsers] = useState(userList);
+
   //call back function - function passed as a prop to child component and called in child component to pass data from child to parent
   const handleData = (data) => {
     console.log(data);
   };
 
+  const handleUserData = (user) => {
+    // userList.push(user);
+    setUsers((prev) => [...prev, user]); //([1,2,3,4,5])=>[1,2,3,4,5, 6]
+    console.log(users);
+  };
+
   return (
     <>
       <h1>{title}</h1>
+      <AddUser userData={handleUserData} />
       <Dashboard
         title={dashboardTitle}
         purpose={dashboardPurpose}
-        users={userList}
+        users={users}
       />
       <Services passData={handleData} />
     </>

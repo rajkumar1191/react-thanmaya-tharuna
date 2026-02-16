@@ -1,7 +1,6 @@
 import style from "./Services.module.css";
 
 const Services = ({ passData }) => {
-  console.log(passData);
   return (
     <>
       <h1>Services</h1>
