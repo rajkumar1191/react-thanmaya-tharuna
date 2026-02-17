@@ -1,14 +1,18 @@
 import Users from "./Users";
 import "./Dashboard.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Dashboard = ({ title, purpose, users }) => {
   // const { title, purpose } = props;
-  // console.log(props);
+  console.log(users);
   const isUser = true;
 
   const [userList, setUserList] = useState(users);
   const [search, setSearchKey] = useState("");
+
+  useEffect(()=>{
+    setUserList(users);
+  },[users])
 
   const handleSearch = (e) => {
     console.log(e);

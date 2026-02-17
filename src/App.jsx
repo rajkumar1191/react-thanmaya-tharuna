@@ -2,6 +2,7 @@ import { useState } from "react";
 import AddUser from "./components/AddUser";
 import Dashboard from "./components/Dashboard";
 import Services from "./components/Services";
+import AddUserByReducer from "./components/AddUserByReducer";
 
 const App = () => {
   const title = "React tutorial";
@@ -59,6 +60,7 @@ const App = () => {
   };
 
   const handleUserData = (user) => {
+    console.log(user)
     // userList.push(user);
     setUsers((prev) => [...prev, user]); //([1,2,3,4,5])=>[1,2,3,4,5, 6]
     console.log(users);
@@ -68,6 +70,7 @@ const App = () => {
     <>
       <h1>{title}</h1>
       <AddUser userData={handleUserData} />
+      <AddUserByReducer userData={handleUserData} />
       <Dashboard
         title={dashboardTitle}
         purpose={dashboardPurpose}
