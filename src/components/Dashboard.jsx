@@ -1,6 +1,6 @@
 import Users from "./Users";
 import "./Dashboard.css";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const Dashboard = ({ title, purpose, users }) => {
   // const { title, purpose } = props;
@@ -58,4 +58,4 @@ const Dashboard = ({ title, purpose, users }) => {
   );
 };
 
-export default Dashboard;
+export default React.memo(Dashboard);

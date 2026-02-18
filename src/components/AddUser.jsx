@@ -24,7 +24,7 @@ const AddUser = ({ userData }) => {
 
   return (
     <>
-      <h4>Add User Form</h4>
+      <h4>Add User Form using useState</h4>
       <form onSubmit={(e) => handleSubmit(e)}>
         <label>
           Name:

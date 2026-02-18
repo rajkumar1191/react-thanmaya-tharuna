@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useCallback, useMemo, useReducer, useRef } from "react";
 
 const initialState = {
   values: {
@@ -48,20 +48,44 @@ const validate = (values) => {
   return errors;
 };
 
-const AddUserByReducer = ({ userData }) => {
+const AddUserByReducerRef = ({ userData }) => {
   // useState -> store the data in component; data can mutable; [currentValue, updateFunction]
   // props -> data can't be changed
   // useReducer
+  // useRef
+  // useMemo -> use to memorize the result
+  // useCallback -> use to memorize the function
+  // React.memo -> prevent component re-render if props are same
+  // useContext -> avoid prop drill -> parent -> child -> child -> child
 
   const [state, dispatch] = useReducer(reducerfn, initialState);
 
-  const handleChange = (e) => {
+  const nameRef = useRef();
+  const usernameRef = useRef();
+  const emailRef = useRef();
+  const phoneRef = useRef();
+  const websiteRef = useRef();
+
+  const refs = {
+    name: nameRef,
+    username: usernameRef,
+    email: emailRef,
+    phone: phoneRef,
+    website: websiteRef,
+  };
+
+  // prevents the function recreation on every render
+  const handleChange = useCallback((e) => {
     dispatch({
       type: "SET_FIELD",
       field: e.target.name,
       value: e.target.value,
     });
-  };
+  }, []);
+
+  const isFormFilled = useMemo(() => {
+    return Object.values(state.values).every((v) => v.trim() != "");
+  }, [state.values]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -71,6 +95,11 @@ const AddUserByReducer = ({ userData }) => {
 
     if (Object.keys(errors).length > 0) {
       dispatch({ type: "SET_ERRORS", payload: errors });
+      ["name", "username", "email"];
+      const firstErrorField = Object.keys(errors)[0];
+      console.log(firstErrorField);
+      refs[firstErrorField]?.current?.focus();
+
       return;
     }
 
@@ -81,7 +110,7 @@ const AddUserByReducer = ({ userData }) => {
 
   return (
     <>
-      <h4>Add User Form Using useReducer</h4>
+      <h4>Add User Form Using useReducer & useRef</h4>
       <form onSubmit={handleSubmit}>
         <div>
           <label>
@@ -92,6 +121,7 @@ const AddUserByReducer = ({ userData }) => {
               value={state.values.name}
               placeholder="Enter Name"
               onChange={handleChange}
+              ref={nameRef}
             />
           </label>
           {state.errors.name && (
@@ -107,6 +137,7 @@ const AddUserByReducer = ({ userData }) => {
               value={state.values.username}
               placeholder="Enter User Name"
               onChange={handleChange}
+              ref={usernameRef}
             />
           </label>
           {state.errors.username && (
@@ -122,6 +153,7 @@ const AddUserByReducer = ({ userData }) => {
               value={state.values.email}
               placeholder="Enter email"
               onChange={handleChange}
+              ref={emailRef}
             />
           </label>
           {state.errors.email && (
@@ -137,6 +169,7 @@ const AddUserByReducer = ({ userData }) => {
               value={state.values.phone}
               placeholder="Enter phone"
               onChange={handleChange}
+              ref={phoneRef}
             />
           </label>
           {state.errors.phone && (
@@ -152,16 +185,19 @@ const AddUserByReducer = ({ userData }) => {
               value={state.values.website}
               placeholder="Enter Website"
               onChange={handleChange}
+              ref={websiteRef}
             />
           </label>
           {state.errors.website && (
             <p style={{ color: "red" }}>{state.errors.website}</p>
           )}
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit" disabled={!isFormFilled}>
+          Submit
+        </button>
       </form>
     </>
   );
 };
 
-export default AddUserByReducer;
+export default AddUserByReducerRef;

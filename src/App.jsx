@@ -3,6 +3,7 @@ import AddUser from "./components/AddUser";
 import Dashboard from "./components/Dashboard";
 import Services from "./components/Services";
 import AddUserByReducer from "./components/AddUserByReducer";
+import AddUserByReducerRef from "./components/AddUserByReducerRef";
 
 const App = () => {
   const title = "React tutorial";
@@ -71,6 +72,7 @@ const App = () => {
       <h1>{title}</h1>
       <AddUser userData={handleUserData} />
       <AddUserByReducer userData={handleUserData} />
+      <AddUserByReducerRef userData={handleUserData} />
       <Dashboard
         title={dashboardTitle}
         purpose={dashboardPurpose}
