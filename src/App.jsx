@@ -4,6 +4,8 @@ import Dashboard from "./components/Dashboard";
 import Services from "./components/Services";
 import AddUserByReducer from "./components/AddUserByReducer";
 import AddUserByReducerRef from "./components/AddUserByReducerRef";
+import AddUserByContext from "./components/AddUserByContext";
+import DashboardUsingContext from "./components/DashboardUsingContext";
 
 const App = () => {
   const title = "React tutorial";
@@ -61,7 +63,7 @@ const App = () => {
   };
 
   const handleUserData = (user) => {
-    console.log(user)
+    console.log(user);
     // userList.push(user);
     setUsers((prev) => [...prev, user]); //([1,2,3,4,5])=>[1,2,3,4,5, 6]
     console.log(users);
@@ -70,6 +72,10 @@ const App = () => {
   return (
     <>
       <h1>{title}</h1>
+      <AddUserByContext />
+
+      <DashboardUsingContext />
+
       <AddUser userData={handleUserData} />
       <AddUserByReducer userData={handleUserData} />
       <AddUserByReducerRef userData={handleUserData} />
