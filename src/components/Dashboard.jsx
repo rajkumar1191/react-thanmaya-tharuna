@@ -10,9 +10,9 @@ const Dashboard = ({ title, purpose, users }) => {
   const [userList, setUserList] = useState(users);
   const [search, setSearchKey] = useState("");
 
-  useEffect(()=>{
+  useEffect(() => {
     setUserList(users);
-  },[users])
+  }, [users]);
 
   const handleSearch = (e) => {
     console.log(e);
@@ -40,7 +40,8 @@ const Dashboard = ({ title, purpose, users }) => {
         onChange={handleSearch}
       />
       <div className={isUser ? "user-container" : "not-a-user"}>
-        {userList.length > 0 &&
+        {userList &&
+          userList.length > 0 &&
           userList.map((user) => (
             <Users
               key={user.id}
@@ -52,7 +53,7 @@ const Dashboard = ({ title, purpose, users }) => {
             />
           ))}
 
-        {userList.length === 0 && <h2>No users found</h2>}
+        {(!userList || userList.length === 0) && <h2>No users found</h2>}
       </div>
     </>
   );
