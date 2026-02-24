@@ -1,7 +1,7 @@
 import Users from "./Users";
 import "./Dashboard.css";
 import React, { useEffect, useState } from "react";
-import { useUsers } from "../context/useUsers";
+import { useUsers } from "../hooks/useUsers";
 
 const DashboardUsingContext = ({ title, purpose }) => {
   // const { title, purpose } = props;

@@ -1,5 +1,5 @@
 import { useReducer } from "react";
-import { useUsers } from "../context/useUsers";
+import { useUsers } from "../hooks/useUsers";
 
 const initialState = {
   values: {
