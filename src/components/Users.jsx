@@ -17,7 +17,7 @@ const Users = (props) => {
       <h3>Email: {props.email}</h3>
       <h3>Phone: {props.phone}</h3>
       <h3>Website: {props.website}</h3>
-      <button onClick={() => props.delete(props.id)}>Delete</button>
+      <button onClick={() => props.onDelete(props.id)}>Delete</button>
     </div>
   );
 };

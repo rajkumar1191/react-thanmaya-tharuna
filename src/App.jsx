@@ -6,6 +6,8 @@ import Nav from "./components/Navbar";
 import DashboardUsingContext from "./components/DashboardUsingContext";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import Login from "./components/Login";
+import DashboardUsingRedux from "./components/DashboardUsingRedux";
+import AddUserByRedux from "./components/AddUserByRedux";
 
 const App = () => {
   return (
@@ -14,12 +16,12 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/add-user" element={<AddUserByContext />} />
+        <Route path="/add-user" element={<AddUserByRedux />} />
         <Route
           path="/dashboard"
           element={
             <ProtectedRoute>
-              <DashboardUsingContext />
+              <DashboardUsingRedux />
             </ProtectedRoute>
           }
         />
